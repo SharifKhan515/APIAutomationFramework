@@ -5,6 +5,8 @@ import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
@@ -35,6 +37,13 @@ public class ApiHelperMethod {
         }
 
         return responseSpecification;
+    }
+
+    public String getValueFromJson(Response response, String key){
+        JsonPath responseJson = new JsonPath(response.asString());
+
+        return responseJson.get(key).toString();
+
     }
 
 }
